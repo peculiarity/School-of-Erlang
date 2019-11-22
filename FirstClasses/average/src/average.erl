@@ -1,6 +1,6 @@
 -module(average).
 
--export([average/1, average_norec/1]).
+-export([average/1, average_norec/1, average_foldl/1]).
 
 % That was tricky one but figured it out even before compilation
 % If the List empty then we can't divide on 0
@@ -36,4 +36,16 @@ average_norec(List) ->
     case List of
         [] -> 0;
         _List -> lists:sum(List)/length(List)
+    end.
+
+% Continue reading the docs basically there is the list:foldl
+% which does same thing as reduce but in a more generic way for lists
+average_foldl(List) ->
+    case List of
+        [] -> 0;
+        _List -> lists:foldl(
+            fun(SeqNum, Acc) -> Acc + SeqNum end,
+            0,
+            List
+        )/length(List)
     end.
