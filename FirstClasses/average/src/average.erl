@@ -1,6 +1,6 @@
 -module(average).
 
--export([average/1, reduce/2]).
+-export([average/1, average_norec/1]).
 
 % That was tricky one but figured it out even before compilation
 % If the List empty then we can't divide on 0
@@ -26,3 +26,14 @@ reduce(Acc, [H|T]) ->
         [] ->
             Acc + H
         end.
+
+
+% After spending some time clicking in the documenta
+% I saw there is actually a function lists:sum
+% that does the trick ( haven't checked how it's implemented though )
+
+average_norec(List) ->
+    case List of
+        [] -> 0;
+        _List -> lists:sum(List)/length(List)
+    end.
