@@ -16,12 +16,13 @@ average(List) ->
 %    It's written in the docs but I guess I skipped it
 % 3. Had hard time to wrap my head around the Pattern / Guard thing.
 %    Had some experience with Scala but long time ago.
+% 4. Realized that the check is sequential so refactor a little bit.  ( removed a guard )
 reduce(Acc, [H|T]) ->
     case T of
-        _List when length(T) > 0 -> 
-            reduce(Acc + H, T);
         [] ->
-            Acc + H
+            Acc + H;
+        _List -> 
+            reduce(Acc + H, T)
         end.
 
 
