@@ -4,7 +4,6 @@
 
 % I ran the tests but basically there is this assertion over small list of 5 elements.
 % The issue is that fizzbuzz is of arity 0 and the task asked to solve fizzbuzz for the 1..100 range.
-% Either the tests or the task is wrong. ( there are some typos as well but that's of no issue )
 
 fizzbuzz() ->
     lists:map(
