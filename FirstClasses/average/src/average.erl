@@ -8,42 +8,20 @@ average(List) ->
         _List -> reduce(0, List)/length(List)
     end.
 
-% Problems I encountered:
-% 1. Used to write variable with lowercase
-%    and since in erlang that is atom I had runtime errors.
-%    had to rename from `acc` to `Acc`
-% 2. `case` should end with `end` keyword.
-%    It's written in the docs but I guess I skipped it
-% 3. Had hard time to wrap my head around the Pattern / Guard thing.
-%    Had some experience with Scala but long time ago.
-% 4. Realized that the check is sequential so refactor a little bit.  ( removed a guard )
-reduce(Acc, [H|T]) ->
-    case T of
-        [] ->
-            Acc + H;
-        _List -> 
-            reduce(Acc + H, T)
-        end.
+reduce(Acc, [H|T]) -> reduce(Acc + H, T);
+reduce(Acc, []) -> Acc.
 
 
 % After spending some time clicking in the documentation
 % I saw that there is actually a function lists:sum
 % that does the trick ( haven't checked internally how it's implemented though )
 
-average_norec(List) ->
-    case List of
-        [] -> 0;
-        _List -> lists:sum(List)/length(List)
-    end.
+average_norec(List) ->lists:sum(List)/length(List).
 
 % Continued reading the docs and found out there is the list:foldl
 % which does same thing as reduce I wrote but in a more generic way for lists
-average_foldl(List) ->
-    case List of
-        [] -> 0;
-        _List -> lists:foldl(
+average_foldl(List) ->lists:foldl(
             fun(SeqNum, Acc) -> Acc + SeqNum end,
             0,
             List
-        )/length(List)
-    end.
+        )/length(List).
